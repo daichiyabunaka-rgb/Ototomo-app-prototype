@@ -167,7 +167,7 @@ CommunityEvent? communityEventFromMap(Map<String, dynamic> m) {
   }
 }
 
-Map<String, dynamic> partsExchangeToMap(InstrumentExchange p) => {
+Map<String, dynamic> musicReportToMap(MusicReport p) => {
       'id': p.id,
       'posterId': p.posterId,
       'kind': p.kind,
@@ -181,9 +181,9 @@ Map<String, dynamic> partsExchangeToMap(InstrumentExchange p) => {
       'closed': p.closed,
     };
 
-InstrumentExchange? partsExchangeFromMap(Map<String, dynamic> m) {
+MusicReport? musicReportFromMap(Map<String, dynamic> m) {
   try {
-    final cat = InstrumentExchange(
+    final cat = MusicReport(
       id: m['id'] as String,
       posterId: m['posterId'] as String,
       kind: m['kind'] as String,
@@ -253,11 +253,11 @@ Map<String, dynamic> pruneSnapshotToOwner(
       .where((e) => e != null && communityIds.contains(e.communityId))
       .cast<CommunityEvent>()
       .toList();
-  final cats = ((snapshot['partsExchanges'] as List?) ?? const [])
+  final cats = ((snapshot['musicReports'] as List?) ?? const [])
       .map((e) => e as Map<String, dynamic>)
-      .map(partsExchangeFromMap)
+      .map(musicReportFromMap)
       .where((d) => d != null && d.posterId == myId)
-      .cast<InstrumentExchange>()
+      .cast<MusicReport>()
       .toList();
   return {
     'recruitments': recs.map(recruitmentToMap).toList(),
@@ -266,6 +266,6 @@ Map<String, dynamic> pruneSnapshotToOwner(
     'messages': messages.map(chatMessageToMap).toList(),
     'communities': communities.map(communityToMap).toList(),
     'events': events.map(communityEventToMap).toList(),
-    'partsExchanges': cats.map(partsExchangeToMap).toList(),
+    'musicReports': cats.map(musicReportToMap).toList(),
   };
 }

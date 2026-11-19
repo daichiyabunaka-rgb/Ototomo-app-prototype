@@ -291,7 +291,7 @@ List<Recruitment> seedRecruitments(DateTime now, List<AppUser> generalUsers) {
   ];
 }
 
-/// ゆずりあい・交換のシード。anchor（現在地）からの相対距離で配置する。
+/// 近況報告のシード。anchor（現在地）からの相対距離で配置する。
 /// id が 'cx-seed-' 始まりのものは GPS 更新のたびに再配置される
 /// （AppState.applyGps を参照）。
 class _ExchangeSeedSpec {
@@ -313,11 +313,11 @@ const List<_ExchangeSeedSpec> _exchangeSeedSpecs = [
   _ExchangeSeedSpec(
     'cx-seed-1',
     'u-drums-nana',
-    'give',
-    '電子ドラム用ペダル（使用済み・動作確認済み）',
+    'shoot',
+    'スタジオでドラムの撮影をしてきました',
     '音楽スタジオ ノート 周辺',
-    'アップグレードで手元に余ったので、'
-        '使ってくださる方にゆずります。手渡し前提です。',
+    '防音室の照明でも撮り味が変わって面白いです。'
+        '練習風景を撮り合う仲間を探しています。',
     0.3,
     -0.6,
     Duration(hours: 2),
@@ -325,11 +325,11 @@ const List<_ExchangeSeedSpec> _exchangeSeedSpecs = [
   _ExchangeSeedSpec(
     'cx-seed-2',
     'u-bass-akira',
-    'wanted',
-    'ポータブルオーディオインターフェースを探しています',
+    'post',
+    'オリジナル曲の録音が一段落しました',
     '駅裏の駐車場 周辺',
-    '弾き語り録音用の小さいものを探しています。不要機材との'
-        '交換の対応も可能です。DMお待ちしています。',
+    '弾き語りのデモができたので近況として報告します。'
+        'フィードバックをくれる方いますと嬉しいです。',
     -0.2,
     0.8,
     Duration(hours: 5),
@@ -337,23 +337,23 @@ const List<_ExchangeSeedSpec> _exchangeSeedSpecs = [
   _ExchangeSeedSpec(
     'cx-seed-3',
     'u-guitar-ken',
-    'trade',
-    'エフェクター（コーラス）と ディレイを交換します',
+    'event',
+    'ライブハウスのオープンマイクに出演してきました',
     '市役所裏の駐車場 周辺',
-    '音作りが変わったので交換希望です。状態は写真で'
-        '送ります。公共の駐車場で受け渡しできます。',
+    '初めての出演でしたが心地よい時間でした。'
+        '次回はセッションにも参加予定です。',
     -0.9,
     -0.3,
     Duration(hours: 26),
   ),
 ];
 
-List<InstrumentExchange> buildSeedInstrumentExchanges(
+List<MusicReport> buildSeedMusicReports(
     DateTime now, double anchorLat, double anchorLng) {
   final cos = (anchorLat * math.pi / 180.0).abs().clamp(0.01, 1.0);
   return [
     for (final s in _exchangeSeedSpecs)
-      InstrumentExchange(
+      MusicReport(
         id: s.id,
         posterId: s.posterId,
         kind: s.kind,
